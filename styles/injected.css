@@ -1,0 +1,411 @@
+/* ============================================================================
+ * MailBoost — styles/injected.css
+ * ----------------------------------------------------------------------------
+ * Styles for every element MailBoost injects into Outlook / Yahoo Mail.
+ *
+ * Every selector is prefixed `mailboost-` so nothing here can ever collide
+ * with the mail app's own CSS. The dark-mode *fix* itself is NOT here — it is
+ * injected at runtime from shared.js so the floating 🌙 button can add and
+ * remove it instantly.
+ * ==========================================================================*/
+
+/* --------------------------------------------------------------------------
+ * Animations
+ * ------------------------------------------------------------------------*/
+
+@keyframes mailboost-slidein {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+@keyframes mailboost-fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes mailboost-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+ * The injected toolbar (Unsubscribe / Snooze / AI Summary)
+ * ------------------------------------------------------------------------*/
+
+.mailboost-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: #1a1a2e;
+  border-bottom: 1px solid #333;
+  font-family: 'Segoe UI', sans-serif;
+  flex-wrap: wrap;
+}
+
+.mailboost-brand {
+  font-size: 12px;
+  font-weight: 700;
+  color: #60b4ff;
+  letter-spacing: 0.2px;
+  margin-right: 4px;
+  white-space: nowrap;
+}
+
+.mailboost-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  transition: all 0.2s;
+}
+
+.mailboost-btn:focus-visible {
+  outline: 2px solid #60b4ff;
+  outline-offset: 2px;
+}
+
+.mailboost-btn-unsub { background: #d32f2f; color: white; }
+.mailboost-btn-unsub:hover { background: #b71c1c; }
+
+.mailboost-btn-snooze { background: #1565c0; color: white; }
+.mailboost-btn-snooze:hover { background: #0d47a1; }
+
+.mailboost-btn-summarize { background: #6a1b9a; color: white; }
+.mailboost-btn-summarize:hover { background: #4a148c; }
+
+.mailboost-btn-primary { background: #0078d4; color: white; }
+.mailboost-btn-primary:hover { background: #106ebe; }
+
+.mailboost-btn-basic { background: #1565c0; color: white; }
+.mailboost-btn-basic:hover { background: #0d47a1; }
+
+.mailboost-btn-pro { background: linear-gradient(135deg, #f5b301, #ff8f00); color: #1a1a2e; }
+.mailboost-btn-pro:hover { filter: brightness(1.08); }
+
+.mailboost-btn-coffee { background: linear-gradient(135deg, #ffdd00, #ffb300); color: #1a1a2e; }
+.mailboost-btn-coffee:hover { filter: brightness(1.06); }
+
+.mailboost-btn-ghost {
+  background: transparent;
+  color: #b0b8c4;
+  border: 1px solid #3a3f4b;
+}
+.mailboost-btn-ghost:hover { background: #2a2f3a; color: #fff; }
+.mailboost-btn-ghost:disabled {
+  opacity: 0.6;
+  cursor: default;
+  color: #8fc7ff;
+  border-color: #3a4767;
+}
+
+.mailboost-full { width: 100%; justify-content: center; margin-top: 14px; }
+
+.mailboost-pro-badge {
+  font-size: 9px;
+  background: gold;
+  color: black;
+  padding: 1px 4px;
+  border-radius: 3px;
+  margin-left: 3px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* --------------------------------------------------------------------------
+ * Floating 🌙 dark mode toggle
+ * ------------------------------------------------------------------------*/
+
+.mailboost-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #0078d4;
+  color: white;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 9999998;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s ease, background 0.2s ease, opacity 0.2s ease;
+}
+
+.mailboost-fab:hover { transform: scale(1.08); }
+.mailboost-fab:active { transform: scale(0.96); }
+.mailboost-fab[data-on="false"] { background: #5a6472; opacity: 0.75; }
+
+/* --------------------------------------------------------------------------
+ * Modals (upgrade wall, snooze, date-time picker)
+ * ------------------------------------------------------------------------*/
+
+.mailboost-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000000cc;
+  z-index: 10000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: mailboost-fadein 0.18s ease;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.mailboost-modal {
+  position: relative;
+  width: min(420px, calc(100vw - 32px));
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: #1a1a2e;
+  color: #e8ecf1;
+  border: 1px solid #2f3545;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+}
+
+.mailboost-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.mailboost-modal-title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.mailboost-modal-x {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  color: #8b95a5;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.mailboost-modal-x:hover { color: #fff; background: #2a2f3a; }
+
+.mailboost-logo {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0078d4;
+  margin-bottom: 10px;
+}
+
+.mailboost-modal-copy {
+  margin: 8px 0 14px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #b8c1cf;
+}
+
+.mailboost-feature-chip {
+  display: inline-block;
+  background: #26314a;
+  border: 1px solid #3a4767;
+  color: #8fc7ff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 999px;
+  margin-bottom: 6px;
+}
+
+.mailboost-plan-row {
+  display: flex;
+  gap: 10px;
+  margin: 14px 0 10px;
+}
+.mailboost-plan-row .mailboost-btn { flex: 1; justify-content: center; padding: 10px; }
+
+.mailboost-fineprint {
+  font-size: 11px;
+  color: #8b95a5;
+  margin: 10px 0 6px;
+  line-height: 1.5;
+}
+
+.mailboost-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #b8c1cf;
+  margin: 12px 0 6px;
+}
+
+.mailboost-input {
+  width: 100%;
+  box-sizing: border-box;
+  background: #12172a;
+  border: 1px solid #333c52;
+  border-radius: 6px;
+  color: #e8ecf1;
+  font-size: 13px;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 9px 10px;
+}
+.mailboost-input:focus {
+  outline: none;
+  border-color: #0078d4;
+  box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.25);
+}
+
+.mailboost-inline-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+}
+.mailboost-inline-row .mailboost-input { flex: 1; }
+.mailboost-inline-row .mailboost-btn { padding: 9px 14px; white-space: nowrap; }
+
+.mailboost-option-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.mailboost-option {
+  text-align: left;
+  background: #232a3d;
+  border: 1px solid #333c52;
+  color: #e8ecf1;
+  border-radius: 8px;
+  padding: 11px 12px;
+  font-size: 13px;
+  font-family: 'Segoe UI', sans-serif;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.mailboost-option:hover { background: #2c3550; border-color: #0078d4; }
+
+/* --------------------------------------------------------------------------
+ * AI summary sidebar
+ * ------------------------------------------------------------------------*/
+
+.mailboost-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  max-width: 100vw;
+  height: 100vh;
+  background: #16192b;
+  color: #e8ecf1;
+  border-left: 1px solid #2f3545;
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.45);
+  z-index: 9999997;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', sans-serif;
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+}
+
+.mailboost-sidebar-open { transform: translateX(0); }
+
+.mailboost-sidebar-head {
+  position: relative;
+  padding: 16px 44px 14px 18px;
+  border-bottom: 1px solid #2f3545;
+  background: #1a1a2e;
+  flex: 0 0 auto;
+}
+
+.mailboost-sidebar-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #d9b3ff;
+}
+
+.mailboost-sidebar-body {
+  padding: 16px 18px 28px;
+  overflow-y: auto;
+  flex: 1 1 auto;
+}
+
+.mailboost-sidebar-h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: #8b95a5;
+  margin: 16px 0 6px;
+  font-weight: 700;
+}
+.mailboost-sidebar-h3:first-child { margin-top: 0; }
+
+.mailboost-sidebar-p {
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0;
+  color: #dfe5ee;
+}
+
+.mailboost-deadline { color: #ffcc80; font-weight: 600; }
+.mailboost-err { color: #ff8a80; }
+
+.mailboost-bullets {
+  margin: 0;
+  padding-left: 18px;
+}
+.mailboost-bullets li {
+  font-size: 13px;
+  line-height: 1.55;
+  margin-bottom: 8px;
+  color: #dfe5ee;
+}
+
+.mailboost-quick-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mailboost-chip {
+  background: #232a3d;
+  border: 1px solid #3a4767;
+  color: #cfe4ff;
+  border-radius: 999px;
+  padding: 6px 11px;
+  font-size: 12px;
+  font-family: 'Segoe UI', sans-serif;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.mailboost-chip:hover { background: #2c3550; border-color: #60b4ff; }
+
+.mailboost-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 40px 0;
+}
+
+.mailboost-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #333c52;
+  border-top-color: #a25bd6;
+  border-radius: 50%;
+  animation: mailboost-spin 0.8s linear infinite;
+}

@@ -1,0 +1,273 @@
+/* ============================================================================
+ * MailBoost — popup/popup.css
+ * Clean dark-themed settings panel, 380px wide (Chrome's comfortable max).
+ * ==========================================================================*/
+
+:root {
+  --bg: #14172a;
+  --card: #1b2036;
+  --card-2: #232a44;
+  --line: #2e3552;
+  --text: #e8ecf1;
+  --muted: #8b95a5;
+  --blue: #0078d4;
+  --gold: #f5b301;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  width: 380px;
+  margin: 0;
+  padding: 0 0 4px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ---- Header --------------------------------------------------------------*/
+
+.mb-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #1a1a2e, #14172a);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.mb-logo {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--blue);
+  letter-spacing: 0.2px;
+}
+
+.mb-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+.mb-badge-free  { background: #3a4150; color: #cfd6e2; }
+.mb-badge-basic { background: var(--blue); color: #fff; }
+.mb-badge-pro   { background: linear-gradient(135deg, var(--gold), #ff8f00); color: #1a1a2e; }
+
+/* ---- Cards ---------------------------------------------------------------*/
+
+main { padding: 12px 12px 0; }
+
+.mb-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 13px 14px;
+  margin-bottom: 10px;
+}
+
+.mb-h2 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--muted);
+}
+
+.mb-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.mb-row-title { font-size: 14px; font-weight: 600; }
+.mb-row-sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+
+/* ---- Toggle switch -------------------------------------------------------*/
+
+.mb-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex: 0 0 auto;
+}
+.mb-switch input { opacity: 0; width: 0; height: 0; }
+
+.mb-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: #454d60;
+  border-radius: 999px;
+  transition: background 0.2s;
+}
+.mb-slider::before {
+  content: '';
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+.mb-switch input:checked + .mb-slider { background: var(--blue); }
+.mb-switch input:checked + .mb-slider::before { transform: translateX(20px); }
+.mb-switch input:focus-visible + .mb-slider { outline: 2px solid #60b4ff; outline-offset: 2px; }
+
+/* ---- Stats ---------------------------------------------------------------*/
+
+.mb-stats { list-style: none; margin: 0; padding: 0; }
+.mb-stats li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px dashed #262d47;
+}
+.mb-stats li:last-child { border-bottom: none; }
+.mb-stats b { font-size: 14px; color: #fff; }
+
+/* ---- Form controls -------------------------------------------------------*/
+
+.mb-label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 10px 0 5px;
+}
+.mb-label:first-of-type { margin-top: 0; }
+
+.mb-input {
+  width: 100%;
+  background: #10142a;
+  border: 1px solid #333c58;
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 12.5px;
+  font-family: inherit;
+  padding: 8px 9px;
+}
+.mb-input:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.25);
+}
+
+select.mb-input { cursor: pointer; }
+
+.mb-inline { display: flex; gap: 7px; align-items: center; }
+.mb-inline .mb-input { flex: 1; min-width: 0; }
+
+.mb-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.mb-btn:focus-visible { outline: 2px solid #60b4ff; outline-offset: 2px; }
+
+.mb-btn-primary { background: var(--blue); color: #fff; }
+.mb-btn-primary:hover { background: #106ebe; }
+
+.mb-btn-mini {
+  background: transparent;
+  border: 1px solid #3f4864;
+  color: var(--muted);
+  padding: 3px 8px;
+  font-size: 11px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.mb-btn-mini:hover { color: #ff8a80; border-color: #7a3535; }
+
+.mb-btn-coffee {
+  width: 100%;
+  background: linear-gradient(135deg, #ffdd00, #ffb300);
+  color: #1a1a2e;
+  padding: 10px;
+  font-size: 13px;
+}
+.mb-btn-coffee:hover { filter: brightness(1.06); }
+
+/* ---- Misc ----------------------------------------------------------------*/
+
+.mb-note {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 8px 0 0;
+  line-height: 1.45;
+}
+.mb-center { text-align: center; }
+
+.mb-link {
+  display: inline-block;
+  margin-top: 7px;
+  font-size: 11.5px;
+  color: #60b4ff;
+  text-decoration: none;
+}
+.mb-link:hover { text-decoration: underline; }
+
+.mb-ok { color: #69f0ae; }
+.mb-bad { color: #ff8a80; }
+
+/* ---- Snooze list ---------------------------------------------------------*/
+
+.mb-list { list-style: none; margin: 0; padding: 0; }
+
+.mb-list li {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  background: var(--card-2);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 8px 9px;
+  margin-bottom: 7px;
+}
+
+.mb-item-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #fff;
+  word-break: break-word;
+}
+.mb-item-note { font-size: 11px; color: #a7b3c7; word-break: break-word; }
+.mb-item-when { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+/* ---- Footer --------------------------------------------------------------*/
+
+.mb-footer {
+  padding: 4px 12px 12px;
+  border-top: 1px solid var(--line);
+  margin-top: 4px;
+  padding-top: 12px;
+}
+
+.mb-footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.mb-footer-links a { color: #60b4ff; text-decoration: none; }
+.mb-footer-links a:hover { text-decoration: underline; }

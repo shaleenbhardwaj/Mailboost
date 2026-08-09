@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MailBoost</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+  <!-- 1. HEADER ------------------------------------------------------------->
+  <header class="mb-header">
+    <div class="mb-logo">⚡ MailBoost</div>
+    <span id="planBadge" class="mb-badge mb-badge-free">Free</span>
+  </header>
+
+  <main>
+
+    <!-- 2. DARK MODE ------------------------------------------------------->
+    <section class="mb-card">
+      <div class="mb-row">
+        <div>
+          <div class="mb-row-title">Dark Mode Fix</div>
+          <div id="darkStatus" class="mb-row-sub">Checking…</div>
+        </div>
+        <label class="mb-switch" title="Toggle the dark mode fix">
+          <input type="checkbox" id="darkToggle">
+          <span class="mb-slider"></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- 3. STATS ----------------------------------------------------------->
+    <section class="mb-card">
+      <h2 class="mb-h2">Your stats</h2>
+      <ul class="mb-stats">
+        <li><span>🚫 Unsubscribed</span><b id="statUnsub">0</b></li>
+        <li><span>✨ Emails summarised</span><b id="statAi">0</b></li>
+        <li><span>⏰ Emails snoozed</span><b id="statSnooze">0</b></li>
+        <li><span>👁️ Dark mode</span><b id="statDark">Active</b></li>
+      </ul>
+      <p id="quotaLine" class="mb-note"></p>
+    </section>
+
+    <!-- 4. AI SUMMARISER --------------------------------------------------->
+    <section class="mb-card">
+      <h2 class="mb-h2">✨ AI Summariser</h2>
+      <label class="mb-label" for="apiKey">Anthropic API Key</label>
+      <div class="mb-inline">
+        <input type="password" id="apiKey" class="mb-input" placeholder="sk-ant-…" autocomplete="off">
+        <button id="saveKey" class="mb-btn mb-btn-primary">Save Key</button>
+      </div>
+      <label class="mb-label" for="model">Model</label>
+      <select id="model" class="mb-input">
+        <option value="claude-sonnet-5">Claude Sonnet 5 — balanced (default)</option>
+        <option value="claude-opus-5">Claude Opus 5 — highest quality</option>
+        <option value="claude-haiku-4-5">Claude Haiku 4.5 — fastest &amp; cheapest</option>
+      </select>
+      <p class="mb-note">Your key stays in your browser. Never sent to our servers.</p>
+      <a id="linkApiKey" class="mb-link" href="#" target="_blank" rel="noopener">Get free API key →</a>
+    </section>
+
+    <!-- 5. LICENSE KEY ----------------------------------------------------->
+    <section class="mb-card">
+      <h2 class="mb-h2">🔑 Licence</h2>
+      <div class="mb-inline">
+        <input type="text" id="licenseKey" class="mb-input" placeholder="MAILBOOST-XXXXXXXXXX" autocomplete="off">
+        <button id="activate" class="mb-btn mb-btn-primary">Activate</button>
+      </div>
+      <p id="licenseStatus" class="mb-note">Current plan: Free</p>
+      <a id="linkBuy" class="mb-link" href="#" target="_blank" rel="noopener">Get a licence key →</a>
+    </section>
+
+    <!-- 6. SNOOZED EMAILS -------------------------------------------------->
+    <section class="mb-card">
+      <h2 class="mb-h2">🔕 Snoozed &amp; scheduled</h2>
+      <ul id="snoozeList" class="mb-list"></ul>
+      <p id="snoozeEmpty" class="mb-note">Nothing snoozed yet.</p>
+    </section>
+
+  </main>
+
+  <!-- 7. FOOTER ------------------------------------------------------------>
+  <footer class="mb-footer">
+    <button id="coffee" class="mb-btn mb-btn-coffee">☕ Buy Me a Coffee</button>
+    <p class="mb-note mb-center">☕ MailBoost saved your eyes? Buy the developer a coffee!</p>
+    <div class="mb-footer-links">
+      <a id="linkPrivacy" href="#" target="_blank" rel="noopener">Privacy Policy</a>
+      <span>·</span>
+      <a id="linkStore" href="#" target="_blank" rel="noopener">Rate on Chrome Store ⭐⭐⭐⭐⭐</a>
+    </div>
+    <p class="mb-note mb-center">MailBoost v1.0 — Made with ❤️ in Berlin</p>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
