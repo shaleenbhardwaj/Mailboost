@@ -134,4 +134,4 @@ Material changes to this policy will be noted in the extension's changelog and t
 
 ## Contact
 
-Questions about privacy: **privacy@mailboost.app** *(replace with your real contact address before publishing).*
+Questions about privacy: **mailboost.extension@gmail.com**
