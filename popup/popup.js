@@ -22,7 +22,7 @@ const LINKS = {
   pro: 'https://gumroad.com/l/mailboost-pro',
   coffee: 'https://buymeacoffee.com/mailboost',
   apiKey: 'https://console.anthropic.com/settings/keys',
-  privacy: 'https://mailboost.app/privacy',
+  privacy: 'https://shaleenbhardwaj.github.io/Mailboost/privacy.html',
   store: 'https://chromewebstore.google.com/detail/mailboost',
 };
 
