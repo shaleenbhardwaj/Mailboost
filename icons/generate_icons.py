@@ -175,8 +175,8 @@ def write_png(path, size, gradient=True, samples=4):
 
 if __name__ == "__main__":
     here = Path(__file__).parent
-    # 16px stays flat and high-contrast -- gradient/shadow detail just
-    # turns to mud at toolbar scale. 48/128 get the fuller treatment.
+    # Flat #0078D4 background, flat white bolt, no gradient/shadow/highlight
+    # -- clean and simple at every size, per spec.
     write_png(here / "icon16.png", 16, gradient=False, samples=4)
-    write_png(here / "icon48.png", 48, gradient=True, samples=4)
-    write_png(here / "icon128.png", 128, gradient=True, samples=4)
+    write_png(here / "icon48.png", 48, gradient=False, samples=4)
+    write_png(here / "icon128.png", 128, gradient=False, samples=4)
